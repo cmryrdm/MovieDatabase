@@ -16,25 +16,27 @@ struct DetailView: View {
   
   var body: some View {
     
-    VStack {
+    ScrollView {
+      VStack {
+        
+        PosterView(posterPath: movie.poster)
+          .aspectRatio(contentMode: .fit)
+          .frame(width: UIScreen.main.bounds.width * 0.9)
+          .overlay(content: {
+            Rectangle()
+              .stroke(.white, lineWidth: 4)
+              .shadow(radius: 4)
+          })
+        
+        Text(movie.overview)
+          .multilineTextAlignment(.center)
+          .padding(.horizontal)
+        
+        
+      }
       
-      Text(movie.title).font(.largeTitle)
-        .multilineTextAlignment(.center)
       
-      PosterView(posterPath: movie.poster)
-        .aspectRatio(contentMode: .fit)
-        .overlay(content: {
-          Rectangle()
-            .stroke(.white, lineWidth: 4)
-            .shadow(radius: 4)
-        })
-      
-      Text(movie.overview)
-        .multilineTextAlignment(.center)
-        .padding(.horizontal)
-      
-      Spacer()
-    }
+    }.navigationTitle(movie.title)
   }
 }
 
